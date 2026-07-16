@@ -1,14 +1,21 @@
 name: 每日股票分析
 
+name: 每日股票分析
+
 on:
-  # 定时触发 - 每天北京时间 18:00 (UTC 10:00)
-  on:
   schedule:
-    - cron: '30 0 * * *'   # 北京时间 08:30 (UTC 00:30)
-    -   # 周一到周五，UTC 10:00 = 北京时间 18:00
-  
-  # 手动触发
-  workflow_dispatch:
+    - cron: '0 10 * * 1-5'    # 周一到周五，UTC 10:00 = 北京时间 18:00
+  workflow_dispatch:           # 允许手动触发
+    inputs:
+      mode:
+        description: '运行模式'
+        required: true
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - stocks-only
+          - market-only
     inputs:
       mode:
         description: '运行模式'
